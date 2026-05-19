@@ -4,8 +4,7 @@ import { spawn } from "child_process";
 import "dotenv/config";
 const app = express();
 // IMPORTANT: to verify GitHub signatures you must use the *raw* request body bytes.
-app.post("/webhook/github", express.raw({ type: "*/*" }), async (req,
-    res) => {
+app.post("/webhook/github", express.raw({ type: "*/*" }), async (req, res) => {
     try {
         const secret = process.env.GITHUB_WEBHOOK_SECRET;
         if (!secret) return res.status(500).send("Missing GITHUB_WEBHOOK_SECRET");
@@ -55,6 +54,5 @@ app.post("/webhook/github", express.raw({ type: "*/*" }), async (req,
     });
 const port = Number(process.env.WEBHOOK_PORT || 9000);
 app.listen(port, () => {
-    console.log(`Webhook listener on
-http://localhost:${port}/webhook/github`);
+    console.log(`Webhook listener on http://localhost:${port}/webhook/github`);
 });
